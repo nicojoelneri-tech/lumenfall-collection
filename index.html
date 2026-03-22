@@ -303,10 +303,9 @@
     <div class="info-card">
       <h3>🎰 ¿Cómo funciona?</h3>
       <p>
-        Durante los streams podés hacer tiradas (multis) para obtener personajes.
-        Cada multi te da una tirada de 10 personajes con chances de obtener
-        personajes de 4 y 5 estrellas. El sistema tiene pity: cuanto más tirás sin suerte,
-        más chances tenés de obtener algo bueno.
+        Durante los streams podés conseguir tiradas (multis) usando puntos de canal,
+        donaciones, o al seguir el canal. Cada multi te garantiza al menos un personaje
+        de 4 estrellas, y siempre existe la chance de que salga un 5 estrellas.
       </p>
     </div>
     <div class="info-card">
@@ -321,9 +320,10 @@
     <div class="info-card">
       <h3>🌟 Pity y garantía</h3>
       <p>
-        Si llegás a 80 tiradas sin obtener un 5 estrellas, se te garantiza uno.
-        Además, si perdés el 50/50 (te sale un permanente en vez del promo),
-        el siguiente 5 estrellas que obtengas va a ser el promo garantizado.
+        A las 40 tiradas se activa un 50/50: tenés chances de obtener al promo del banner
+        o a un 5 estrellas permanente. Si perdés el 50/50, tu próximo 5 estrellas
+        va a ser el promo garantizado. Cuanto más tirás, más se acumulan las probabilidades
+        a tu favor.
       </p>
     </div>
     <div class="info-card">
@@ -388,22 +388,11 @@
   </div>
 
   <div class="profile-section">
-    <h3>🎰 Gacha</h3>
+    <h3>📋 General</h3>
     <table class="cmd-table">
       <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
       <tbody>
-        <tr><td><span class="cmd-code">!multi</span></td><td>Hacer una tirada de 10 personajes en el banner actual</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="profile-section">
-    <h3>📋 Información</h3>
-    <table class="cmd-table">
-      <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
-      <tbody>
-        <tr><td><span class="cmd-code">!personajes</span></td><td>Ver tu colección de personajes en el chat</td></tr>
-        <tr><td><span class="cmd-code">!perfil</span></td><td>Ver tu perfil: personaje equipado, pity y garantía</td></tr>
+        <tr><td><span class="cmd-code">!perfil</span></td><td>Acceder a este portal con tu colección, pity, garantía y toda tu info</td></tr>
         <tr><td><span class="cmd-code">!equip [nombre]</span></td><td>Equipar un personaje para usar su skill. Ej: <code>!equip Shen Luo</code></td></tr>
       </tbody>
     </table>
@@ -427,22 +416,13 @@
   </div>
 
   <div class="suggest-form" id="suggestForm">
-    <label>Tu nombre de Twitch</label>
-    <input type="text" id="sg-name" placeholder="usuario" />
-
-    <label>Tipo de sugerencia</label>
-    <select id="sg-type">
-      <option value="Personaje nuevo">Personaje nuevo</option>
-      <option value="Skill nueva">Skill nueva</option>
-      <option value="Mejora de sistema">Mejora de sistema</option>
-      <option value="Bug / Problema">Bug / Problema</option>
-      <option value="Otro">Otro</option>
-    </select>
-
-    <label>Tu sugerencia</label>
-    <textarea id="sg-body" placeholder="Describí tu idea con todo el detalle que quieras..."></textarea>
-
-    <button class="suggest-btn" onclick="sendSuggestion()">Enviar sugerencia</button>
+    <div id="suggest-frame-wrap" style="text-align:center;">
+      <p style="color:var(--muted);font-size:14px;margin-bottom:16px;">Completá el formulario y tu sugerencia nos llega directamente.</p>
+      <iframe id="suggest-iframe" src="" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:10px;background:transparent;display:none;">Cargando…</iframe>
+      <p id="suggest-placeholder" style="color:var(--muted);font-size:13px;padding:40px 0;">
+        El formulario de sugerencias estará disponible próximamente.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -540,13 +520,37 @@ function renderBanner(){
     html += `<div class="banner-grid" id="banner-feat4"></div>`;
   }
 
+  // Inactive characters (old promos + old 4-stars)
+  const oldPromo = Object.entries(chars).filter(([n, info]) => info.tier === "5-promo-old");
+  const old4 = Object.entries(chars).filter(([n, info]) => info.tier === "4-old");
+  if(oldPromo.length > 0 || old4.length > 0){
+    html += `<div style="margin-top:40px;padding-top:28px;border-top:1px solid var(--border);">`;
+    html += `<div style="text-align:center;margin-bottom:24px;">`;
+    html += `<div style="font-size:18px;font-weight:900;color:var(--muted);margin-bottom:6px;">Fuera de banner</div>`;
+    html += `<div style="font-size:13px;color:rgba(255,255,255,0.3);">Estos personajes no están disponibles en el banner actual, pero volverán en el futuro. Si ya los tenés, podés seguir usándolos.</div>`;
+    html += `</div>`;
+    if(oldPromo.length > 0){
+      html += `<div class="banner-section-title" style="color:rgba(255,210,60,0.25);">★★★★★ Promos anteriores</div>`;
+      html += `<div class="banner-grid" id="banner-old-promo"></div>`;
+    }
+    if(old4.length > 0){
+      html += `<div class="banner-section-title" style="color:rgba(160,130,255,0.25);">★★★★ 4 Estrellas anteriores</div>`;
+      html += `<div class="banner-grid" id="banner-old-4"></div>`;
+    }
+    html += `</div>`;
+  }
+
   container.innerHTML = html;
 
   // Render cards
   const gridPerma5 = document.getElementById("banner-perma5");
   const gridFeat4 = document.getElementById("banner-feat4");
+  const gridOldPromo = document.getElementById("banner-old-promo");
+  const gridOld4 = document.getElementById("banner-old-4");
   if(gridPerma5) perma5.forEach(([n, info]) => gridPerma5.appendChild(createCard(n, info, true, 0, false, true)));
   if(gridFeat4) featured4.forEach(([n, info]) => gridFeat4.appendChild(createCard(n, info, true, 0, false, true)));
+  if(gridOldPromo) oldPromo.forEach(([n, info]) => gridOldPromo.appendChild(createCard(n, info, true, 0, false, true)));
+  if(gridOld4) old4.forEach(([n, info]) => gridOld4.appendChild(createCard(n, info, true, 0, false, true)));
 }
 
 // ======== COLLECTION PAGE ========
@@ -613,21 +617,16 @@ function renderSkillsTable(){
 }
 
 // ======== SUGGESTIONS ========
-function sendSuggestion(){
-  const name = document.getElementById("sg-name").value.trim();
-  const type = document.getElementById("sg-type").value;
-  const body = document.getElementById("sg-body").value.trim();
-
-  if(!name){ alert("Ingresá tu nombre de Twitch"); return; }
-  if(!body){ alert("Escribí tu sugerencia"); return; }
-
-  const subject = encodeURIComponent(`[Lumenfall] ${type} — de ${name}`);
-  const mailBody = encodeURIComponent(
-    `Usuario: ${name}\nTipo: ${type}\n\n${body}\n\n---\nEnviado desde la web de Lumenfall`
-  );
-
-  window.location.href = `mailto:elnovato.lumenfall@gmail.com?subject=${subject}&body=${mailBody}`;
-}
+// Para activar: creá un Google Form, copiá el link de "embed" y pegalo acá:
+const GOOGLE_FORM_URL = ""; // ← pegar acá el link del iframe de Google Forms
+(function(){
+  if(GOOGLE_FORM_URL){
+    const iframe = document.getElementById("suggest-iframe");
+    iframe.src = GOOGLE_FORM_URL;
+    iframe.style.display = "block";
+    document.getElementById("suggest-placeholder").style.display = "none";
+  }
+})();
 
 // ======== INIT ========
 const params = new URLSearchParams(window.location.search);
