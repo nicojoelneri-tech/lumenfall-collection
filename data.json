@@ -1,0 +1,19 @@
+{
+  "lastUpdate": "2026-03-22T03:00:00",
+  "characters": {
+    "Shen Luo": { "elem": "aire", "tier": "5-promo", "skill": "VOZ", "cmd": "!voz <mensaje>", "desc": "Tu mensaje se reproduce en voz alta en el stream. 3 usos por día." },
+    "Vespera Rohe": { "elem": "electro", "tier": "5-promo-old", "skill": "MARCA", "cmd": "!marcar @usuario", "desc": "Marca a un usuario. Si usa un poder negativo, le rebota. Dura 10 min." },
+    "Eira Lumen": { "elem": "luz", "tier": "5-perma", "skill": "ANULAR", "cmd": "!anular @usuario", "desc": "Cancela efectos negativos (Chispa, Silencio). 3 usos por día." },
+    "Marel Varg": { "elem": "agua", "tier": "5-perma", "skill": "MAREL", "cmd": "!marel @usuario", "desc": "Silencia al objetivo por 2 min. 1 uso por día." },
+    "Yun Ling": { "elem": "aire", "tier": "5-perma", "skill": "VENDAVAL", "cmd": "!vendaval", "desc": "Limpia todas las apariencias y efectos del chat. 1 uso por día." },
+    "Hong Ye": { "elem": "vacio", "tier": "5-perma", "skill": "MÁSCARA", "cmd": "!mascara @victima @imitar", "desc": "Disfraza a un usuario como otro por 2 min. 2 usos por día." },
+    "Seraphine Velaryn": { "elem": "fuego", "tier": "5-perma", "skill": "FIJAR", "cmd": "!fijar <mensaje>", "desc": "Fija un mensaje ardiente en el overlay. Dura 3 min. 1 uso por día." },
+    "Ren Kuro": { "elem": "electro", "tier": "4", "skill": "ESCUDO", "cmd": "!escudo @usuario", "desc": "Protege del próximo efecto negativo. Dura 10 min. 1 uso por día." },
+    "Zippa zip Kalix": { "elem": "luz", "tier": "4", "skill": "CONFETI", "cmd": "!confeti @usuario", "desc": "Mensajes del objetivo se vuelven arcoíris por 3 min. 2 usos por día." },
+    "Miren Vale": { "elem": "vacio", "tier": "4", "skill": "ECO", "cmd": "!eco @usuario", "desc": "Los mensajes del objetivo se repiten como eco 15s después. 1 uso por día." },
+    "Liora": { "elem": "electro", "tier": "4-old", "skill": "CHISPA", "cmd": "!chispa @usuario", "desc": "Scramblea las palabras del objetivo por 2 min. 2 usos por día." },
+    "Kaisr Vel": { "elem": "fuego", "tier": "4-old", "skill": "VEL", "cmd": "!vel", "desc": "Resalta tus mensajes en el chat por 10 min." },
+    "Kael Draven": { "elem": "vacio", "tier": "4-old", "skill": "MULTINULL", "cmd": "!multinull", "desc": "Bloquea todas las multis por 2 min. 1 uso por día." }
+  },
+  "users": {}
+}

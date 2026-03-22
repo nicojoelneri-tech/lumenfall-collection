@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Lumenfall - Colección (Mockup)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap');
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    width:1920px; height:1080px;
+    background: rgba(0,0,0,0.85);
+    overflow:hidden;
+    font-family:'Inter',system-ui,sans-serif;
+  }
+
+  /* Fondo con gradiente oscuro */
+  .bg{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(120,255,160,0.04), transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(155,95,255,0.04), transparent 50%),
+      linear-gradient(180deg, rgba(8,6,14,0.98), rgba(4,3,8,0.99));
+  }
+
+  /* Header */
+  .header{
+    position:absolute;
+    top:40px; left:0; right:0;
+    text-align:center;
+  }
+  .header-title{
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.3);
+    margin-bottom:6px;
+  }
+  .header-user{
+    font-size:28px;
+    font-weight:900;
+    color:rgba(255,255,255,0.95);
+    letter-spacing:1px;
+  }
+  .header-stats{
+    margin-top:8px;
+    font-size:13px;
+    font-weight:500;
+    color:rgba(255,255,255,0.4);
+    letter-spacing:1px;
+  }
+
+  /* Grid de personajes */
+  .grid{
+    position:absolute;
+    top:150px;
+    left:50%;
+    transform:translateX(-50%);
+    display:grid;
+    grid-template-columns: repeat(7, 200px);
+    gap:20px;
+  }
+
+  /* Card de personaje */
+  .card{
+    position:relative;
+    width:200px;
+    height:280px;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:default;
+    transition: transform 0.2s;
+  }
+  .card:hover{ transform:scale(1.03); }
+
+  /* Card que tiene el personaje */
+  .card.owned{
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:
+      0 8px 30px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(255,255,255,0.05) inset;
+  }
+
+  /* Card que NO tiene */
+  .card.locked{
+    border:1px solid rgba(255,255,255,0.05);
+    filter: brightness(0.3) grayscale(0.8);
+    opacity:0.5;
+  }
+
+  /* Imagen del personaje */
+  .card-img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+  }
+
+  /* Degradado sobre la imagen */
+  .card-overlay{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:120px;
+    background: linear-gradient(0deg, rgba(10,8,20,0.95) 30%, transparent);
+    pointer-events:none;
+  }
+
+  /* Info del personaje */
+  .card-info{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    padding:10px 12px 14px;
+  }
+
+  .card-stars{
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:3px;
+  }
+  .star-4{ color:rgba(160,130,255,0.9); }
+  .star-5{ color:rgba(255,210,60,0.9); }
+
+  .card-name{
+    font-size:14px;
+    font-weight:900;
+    color:rgba(255,255,255,0.95);
+    letter-spacing:0.3px;
+    line-height:1.2;
+  }
+
+  .card-elem{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    margin-top:5px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Colores de elemento */
+  .elem-electro{ color:rgba(180,130,255,0.9); border-color:rgba(155,95,255,0.25); }
+  .elem-fuego{ color:rgba(255,160,90,0.9); border-color:rgba(255,120,60,0.25); }
+  .elem-agua{ color:rgba(130,220,255,0.9); border-color:rgba(110,210,255,0.25); }
+  .elem-luz{ color:rgba(255,225,110,0.9); border-color:rgba(255,210,80,0.25); }
+  .elem-aire{ color:rgba(140,255,180,0.9); border-color:rgba(120,255,160,0.25); }
+  .elem-vacio{ color:rgba(255,130,210,0.9); border-color:rgba(255,95,190,0.25); }
+
+  /* Glow por rareza en el borde superior */
+  .card.owned.rarity-5::before{
+    content:"";
+    position:absolute;
+    top:-1px; left:15%; right:15%;
+    height:2px;
+    border-radius:999px;
+    background:linear-gradient(90deg, transparent, rgba(255,210,60,0.7), transparent);
+    z-index:5;
+  }
+  .card.owned.rarity-4::before{
+    content:"";
+    position:absolute;
+    top:-1px; left:20%; right:20%;
+    height:2px;
+    border-radius:999px;
+    background:linear-gradient(90deg, transparent, rgba(160,130,255,0.5), transparent);
+    z-index:5;
+  }
+
+  /* Badge de equipado */
+  .equipped-badge{
+    position:absolute;
+    top:10px; right:10px;
+    padding:3px 8px;
+    border-radius:6px;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:rgba(120,255,160,0.95);
+    background:rgba(120,255,160,0.12);
+    border:1px solid rgba(120,255,160,0.25);
+    z-index:5;
+  }
+
+  /* Badge de copias */
+  .copies-badge{
+    position:absolute;
+    top:10px; left:10px;
+    padding:3px 7px;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:900;
+    color:rgba(255,255,255,0.8);
+    background:rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.1);
+    z-index:5;
+  }
+
+  /* Lock icon para no obtenidos */
+  .lock-icon{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    font-size:32px;
+    opacity:0.3;
+    z-index:5;
+  }
+
+  /* Skill info tooltip */
+  .card-skill{
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:rgba(8,6,14,0.92);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    opacity:0;
+    transition:opacity 0.2s;
+    z-index:10;
+    border-radius:16px;
+  }
+  .card:hover .card-skill{ opacity:1; }
+
+  .skill-name{
+    font-size:16px;
+    font-weight:900;
+    color:rgba(255,255,255,0.95);
+    margin-bottom:4px;
+  }
+  .skill-cmd{
+    font-size:12px;
+    font-weight:700;
+    color:rgba(255,255,255,0.4);
+    margin-bottom:12px;
+    font-family:monospace;
+  }
+  .skill-desc{
+    font-size:11px;
+    color:rgba(255,255,255,0.6);
+    text-align:center;
+    line-height:1.4;
+  }
+
+  /* Footer */
+  .footer{
+    position:absolute;
+    bottom:30px;
+    left:0; right:0;
+    text-align:center;
+    font-size:11px;
+    color:rgba(255,255,255,0.2);
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  /* Sección 5★ y 4★ separadas */
+  .section-label{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.2);
+  }
+  .label-5{ top:130px; color:rgba(255,210,60,0.4); }
+  .label-4{ top:470px; color:rgba(160,130,255,0.4); }
+
+  .grid-5{
+    position:absolute;
+    top:155px;
+    left:50%;
+    transform:translateX(-50%);
+    display:grid;
+    grid-template-columns: repeat(6, 190px);
+    gap:16px;
+  }
+
+  .grid-4{
+    position:absolute;
+    top:495px;
+    left:50%;
+    transform:translateX(-50%);
+    display:grid;
+    grid-template-columns: repeat(6, 190px);
+    gap:16px;
+  }
+
+  .card-sm{
+    width:190px;
+    height:260px;
+  }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="header">
+  <div class="header-title">Colección</div>
+  <div class="header-user">elnovato_nn</div>
+  <div class="header-stats">9 / 13 personajes · Pity: 10/80 · Asegurado: NO</div>
+</div>
+
+<div class="section-label label-5">★★★★★ &nbsp; 5 Estrellas</div>
+
+<div class="grid-5">
+  <!-- Shen Luo - 5★ promo (owned, equipped) -->
+  <div class="card card-sm owned rarity-5">
+    <div class="equipped-badge">Equipado</div>
+    <div class="copies-badge">x1</div>
+    <img class="card-img" src="../../Personajes/Tirada/Shen Luo.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Shen Luo</div>
+      <div class="card-elem elem-aire">🍃 Aire</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">VOZ</div>
+      <div class="skill-cmd">!voz &lt;mensaje&gt;</div>
+      <div class="skill-desc">Tu mensaje se reproduce en voz alta en el stream. 3 usos por día.</div>
+    </div>
+  </div>
+
+  <!-- Vespera Rohe - 5★ promo old (owned) -->
+  <div class="card card-sm owned rarity-5">
+    <div class="copies-badge">x2</div>
+    <img class="card-img" src="../../Personajes/Tirada/Vespera Rohe.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Vespera Rohe</div>
+      <div class="card-elem elem-electro">⚡ Electro</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">MARCA</div>
+      <div class="skill-cmd">!marcar @usuario</div>
+      <div class="skill-desc">Marca a un usuario. Si usa un poder negativo, le rebota. Dura 10 min.</div>
+    </div>
+  </div>
+
+  <!-- Eira - 5★ perma (owned) -->
+  <div class="card card-sm owned rarity-5">
+    <div class="copies-badge">x1</div>
+    <img class="card-img" src="../../Personajes/Tirada/Eira Lumen.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Eira Lumen</div>
+      <div class="card-elem elem-luz">☀ Luz</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">ANULAR</div>
+      <div class="skill-cmd">!anular @usuario</div>
+      <div class="skill-desc">Cancela efectos negativos (Chispa, Silencio). 3 usos por día.</div>
+    </div>
+  </div>
+
+  <!-- Marel - 5★ perma (NOT owned) -->
+  <div class="card card-sm locked rarity-5">
+    <div class="lock-icon">🔒</div>
+    <img class="card-img" src="../../Personajes/Tirada/Marel Varg.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Marel Varg</div>
+      <div class="card-elem elem-agua">❄️ Agua</div>
+    </div>
+  </div>
+
+  <!-- Seraphine - 5★ perma (owned) -->
+  <div class="card card-sm owned rarity-5">
+    <div class="copies-badge">x1</div>
+    <img class="card-img" src="../../Personajes/Tirada/Seraphine Velaryn.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Seraphine Velaryn</div>
+      <div class="card-elem elem-fuego">🔥 Fuego</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">FIJAR</div>
+      <div class="skill-cmd">!fijar &lt;mensaje&gt;</div>
+      <div class="skill-desc">Fija un mensaje en el overlay del chat. Arde por 3 min.</div>
+    </div>
+  </div>
+
+  <!-- Hong Ye - 5★ perma (NOT owned) -->
+  <div class="card card-sm locked rarity-5">
+    <div class="lock-icon">🔒</div>
+    <img class="card-img" src="../../Personajes/Tirada/Hong Ye.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-5">★★★★★</div>
+      <div class="card-name">Hong Ye</div>
+      <div class="card-elem elem-vacio">✦ Vacío</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label label-4">★★★★ &nbsp; 4 Estrellas</div>
+
+<div class="grid-4">
+  <!-- Ren Kuro (owned) -->
+  <div class="card card-sm owned rarity-4">
+    <div class="copies-badge">x3</div>
+    <img class="card-img" src="../../Personajes/Tirada/Ren Kuro.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Ren Kuro</div>
+      <div class="card-elem elem-electro">⚡ Electro</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">ESCUDO</div>
+      <div class="skill-cmd">!escudo @usuario</div>
+      <div class="skill-desc">Protege del próximo efecto negativo. 1 uso por día.</div>
+    </div>
+  </div>
+
+  <!-- Zippa (owned) -->
+  <div class="card card-sm owned rarity-4">
+    <div class="copies-badge">x1</div>
+    <img class="card-img" src="../../Personajes/Tirada/Zippa zip Kalix.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Zippa zip Kalix</div>
+      <div class="card-elem elem-luz">☀ Luz</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">CONFETI</div>
+      <div class="skill-cmd">!confeti @usuario</div>
+      <div class="skill-desc">Hace que los mensajes del objetivo sean arcoíris. 2 usos por día.</div>
+    </div>
+  </div>
+
+  <!-- Miren Vale (NOT owned) -->
+  <div class="card card-sm locked rarity-4">
+    <div class="lock-icon">🔒</div>
+    <img class="card-img" src="../../Personajes/Tirada/Miren Vale.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Miren Vale</div>
+      <div class="card-elem elem-vacio">✦ Vacío</div>
+    </div>
+  </div>
+
+  <!-- Liora (owned) -->
+  <div class="card card-sm owned rarity-4">
+    <div class="copies-badge">x5</div>
+    <img class="card-img" src="../../Personajes/Tirada/Liora.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Liora</div>
+      <div class="card-elem elem-electro">⚡ Electro</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">CHISPA</div>
+      <div class="skill-cmd">!chispa @usuario</div>
+      <div class="skill-desc">Scramblea las palabras del objetivo. 2 usos por día.</div>
+    </div>
+  </div>
+
+  <!-- Kaisr Vel (owned) -->
+  <div class="card card-sm owned rarity-4">
+    <div class="copies-badge">x2</div>
+    <img class="card-img" src="../../Personajes/Tirada/Kaisr Vel.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Kaisr Vel</div>
+      <div class="card-elem elem-fuego">🔥 Fuego</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">VEL</div>
+      <div class="skill-cmd">!vel</div>
+      <div class="skill-desc">Resalta tus mensajes en el chat por 10 min.</div>
+    </div>
+  </div>
+
+  <!-- Kael Draven (owned) -->
+  <div class="card card-sm owned rarity-4">
+    <div class="copies-badge">x1</div>
+    <img class="card-img" src="../../Personajes/Tirada/Kael Draven.png" />
+    <div class="card-overlay"></div>
+    <div class="card-info">
+      <div class="card-stars star-4">★★★★</div>
+      <div class="card-name">Kael Draven</div>
+      <div class="card-elem elem-vacio">✦ Vacío</div>
+    </div>
+    <div class="card-skill">
+      <div class="skill-name">MULTINULL</div>
+      <div class="skill-cmd">!multinull</div>
+      <div class="skill-desc">Bloquea todas las multis por 2 min. 1 uso por día.</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">LUMENFALL · Colección de personajes</div>
+
+</body>
+</html>
