@@ -22,9 +22,8 @@
   body{
     min-height:100vh;
     background:
-      radial-gradient(ellipse at 20% 10%,rgba(120,255,160,0.03),transparent 50%),
-      radial-gradient(ellipse at 80% 90%,rgba(155,95,255,0.03),transparent 50%),
-      var(--bg);
+      linear-gradient(180deg, rgba(8,6,14,0.88) 0%, rgba(8,6,14,0.75) 40%, rgba(8,6,14,0.92) 100%),
+      url('img/bg.png') center/cover no-repeat fixed;
     font-family:'Inter',system-ui,sans-serif;
     color:var(--text);
   }
@@ -40,9 +39,11 @@
     max-width:100%;overflow-x:auto;
   }
   .nav-logo{
-    font-size:11px;font-weight:900;letter-spacing:4px;
-    color:var(--muted);margin-right:24px;white-space:nowrap;
+    font-size:16px;font-weight:900;letter-spacing:6px;
+    margin-right:28px;white-space:nowrap;
     text-transform:uppercase;
+    background:linear-gradient(135deg, rgba(200,180,255,0.9), rgba(255,255,255,0.7));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
   .nav-btn{
     padding:14px 16px;border:none;background:none;
