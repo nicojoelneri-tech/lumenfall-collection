@@ -3,29 +3,171 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lumenfall — Colección</title>
+<title>Lumenfall — El Novato</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
-  :root{ --bg:#08060e; --card-bg:rgba(18,14,28,0.95); --border:rgba(255,255,255,0.08); --text:rgba(255,255,255,0.92); --muted:rgba(255,255,255,0.4); }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+  :root{
+    --bg:#08060e;
+    --card-bg:rgba(18,14,28,0.95);
+    --border:rgba(255,255,255,0.08);
+    --border-hi:rgba(255,255,255,0.15);
+    --text:rgba(255,255,255,0.92);
+    --muted:rgba(255,255,255,0.4);
+    --accent:rgba(120,255,160,0.9);
+    --accent2:rgba(155,95,255,0.9);
+    --gold:rgba(255,210,60,0.9);
+    --purple:rgba(160,130,255,0.9);
+  }
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{min-height:100vh;background:radial-gradient(ellipse at 20% 10%,rgba(120,255,160,0.03),transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(155,95,255,0.03),transparent 50%),var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--text);}
-  .search-container{max-width:500px;margin:0 auto;padding:60px 20px 20px;text-align:center;}
-  .logo{font-size:12px;font-weight:900;letter-spacing:6px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-  .title{font-size:32px;font-weight:900;margin-bottom:24px;background:linear-gradient(135deg,rgba(120,255,160,0.9),rgba(155,95,255,0.9));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .search-box{width:100%;padding:14px 20px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:16px;font-family:inherit;outline:none;transition:border-color 0.2s;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% 10%,rgba(120,255,160,0.03),transparent 50%),
+      radial-gradient(ellipse at 80% 90%,rgba(155,95,255,0.03),transparent 50%),
+      var(--bg);
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+  }
+
+  /* ============ NAV ============ */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(8,6,14,0.85);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;
+    padding:0 20px;
+    max-width:100%;overflow-x:auto;
+  }
+  .nav-logo{
+    font-size:11px;font-weight:900;letter-spacing:4px;
+    color:var(--muted);margin-right:24px;white-space:nowrap;
+    text-transform:uppercase;
+  }
+  .nav-btn{
+    padding:14px 16px;border:none;background:none;
+    color:var(--muted);font-size:13px;font-weight:600;font-family:inherit;
+    cursor:pointer;white-space:nowrap;
+    border-bottom:2px solid transparent;
+    transition:all 0.15s;
+  }
+  .nav-btn:hover{color:var(--text);}
+  .nav-btn.active{color:var(--accent);border-bottom-color:rgba(120,255,160,0.5);}
+  @media(max-width:600px){
+    .nav-logo{display:none;}
+    .nav-btn{padding:12px 10px;font-size:12px;}
+  }
+
+  /* ============ SECTIONS ============ */
+  .page{display:none;max-width:1200px;margin:0 auto;padding:40px 20px 60px;}
+  .page.active{display:block;}
+  @media(max-width:768px){.page{padding:24px 16px 40px;}}
+
+  /* ============ WELCOME ============ */
+  .hero{text-align:center;padding:40px 0 30px;}
+  .hero-title{
+    font-size:42px;font-weight:900;line-height:1.1;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    margin-bottom:12px;
+  }
+  .hero-sub{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.6;}
+  @media(max-width:600px){.hero-title{font-size:28px;}.hero-sub{font-size:14px;}}
+
+  .info-cards{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;margin-top:30px;
+  }
+  .info-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:14px;padding:24px;
+    transition:border-color 0.2s;
+  }
+  .info-card:hover{border-color:var(--border-hi);}
+  .info-card h3{font-size:15px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .info-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;}
+
+  /* ============ BANNER ============ */
+  .banner-header{text-align:center;margin-bottom:30px;}
+  .banner-header h2{
+    font-size:28px;font-weight:900;
+    background:linear-gradient(135deg,var(--gold),rgba(255,160,60,0.9));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .banner-header p{font-size:13px;color:var(--muted);margin-top:6px;}
+
+  .banner-promo{
+    background:var(--card-bg);border:1px solid rgba(255,210,60,0.15);
+    border-radius:16px;overflow:hidden;
+    display:flex;align-items:center;gap:0;
+    margin-bottom:24px;
+  }
+  .banner-promo-img{
+    width:220px;min-height:280px;object-fit:cover;object-position:center top;flex-shrink:0;
+  }
+  .banner-promo-info{padding:28px 32px;flex:1;}
+  .banner-promo-info .stars{font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+  .banner-promo-info h3{font-size:24px;font-weight:900;margin-bottom:4px;}
+  .banner-promo-info .elem-tag{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+    margin-bottom:12px;
+  }
+  .banner-promo-info .skill-info{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+  .banner-promo-info .skill-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .banner-promo-info .skill-cmd{font-size:12px;color:var(--muted);font-family:'Courier New',monospace;margin-bottom:6px;}
+  .banner-promo-info .skill-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;}
+  @media(max-width:600px){
+    .banner-promo{flex-direction:column;}
+    .banner-promo-img{width:100%;min-height:200px;max-height:300px;}
+    .banner-promo-info{padding:20px;}
+    .banner-promo-info h3{font-size:20px;}
+  }
+
+  .banner-section-title{
+    font-size:11px;font-weight:900;letter-spacing:4px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:14px;
+  }
+  .banner-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;
+    margin-bottom:28px;
+  }
+
+  /* ============ COLLECTION (reutilizando estilos) ============ */
+  .search-container{max-width:500px;margin:0 auto;padding:20px 0 20px;text-align:center;}
+  .search-title{
+    font-size:28px;font-weight:900;margin-bottom:20px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .search-box{
+    width:100%;padding:14px 20px;border-radius:12px;
+    border:1px solid var(--border);background:rgba(255,255,255,0.04);
+    color:var(--text);font-size:16px;font-family:inherit;outline:none;
+    transition:border-color 0.2s;
+  }
   .search-box:focus{border-color:rgba(120,255,160,0.3);}
   .search-box::placeholder{color:var(--muted);}
   .search-hint{margin-top:10px;font-size:12px;color:var(--muted);}
   .not-found{text-align:center;padding:40px;color:var(--muted);font-size:14px;display:none;}
-  .user-header{max-width:1200px;margin:0 auto;padding:30px 20px 10px;text-align:center;display:none;}
+  .user-header{text-align:center;padding:20px 0 10px;display:none;}
   .user-name{font-size:24px;font-weight:900;}
   .user-stats{font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:0.5px;}
-  .section{max-width:1200px;margin:0 auto;padding:20px 20px 10px;display:none;}
-  .section-title{font-size:11px;font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;}
-  .section-5 .section-title{color:rgba(255,210,60,0.5);}
-  .section-4 .section-title{color:rgba(160,130,255,0.5);}
+  .coll-section{padding:20px 0 10px;display:none;}
+  .coll-section-title{font-size:11px;font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;}
+  .section-5 .coll-section-title{color:rgba(255,210,60,0.5);}
+  .section-4 .coll-section-title{color:rgba(160,130,255,0.5);}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;}
-  .card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);transition:transform 0.15s,border-color 0.15s;cursor:default;}
+  @media(max-width:768px){.grid,.banner-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}}
+
+  /* ============ CARDS ============ */
+  .card{
+    position:relative;border-radius:14px;overflow:hidden;
+    border:1px solid var(--border);background:var(--card-bg);
+    transition:transform 0.15s,border-color 0.15s;cursor:default;
+  }
   .card:hover{transform:scale(1.03);}
   .card.locked{filter:brightness(0.25) grayscale(0.8);opacity:0.5;}
   .card.locked:hover{transform:none;}
@@ -41,7 +183,12 @@
   .card-stars{font-size:10px;letter-spacing:2px;margin-bottom:2px;}
   .star-5{color:rgba(255,210,60,0.9);}.star-4{color:rgba(160,130,255,0.9);}
   .card-name{font-size:13px;font-weight:900;color:var(--text);line-height:1.2;}
-  .card-elem{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);}
+  .card-elem{
+    display:inline-flex;align-items:center;gap:3px;margin-top:4px;
+    font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:2px 7px;border-radius:999px;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  }
   .elem-electro{color:rgba(180,130,255,0.9);border-color:rgba(155,95,255,0.2);}
   .elem-fuego{color:rgba(255,160,90,0.9);border-color:rgba(255,120,60,0.2);}
   .elem-agua{color:rgba(130,220,255,0.9);border-color:rgba(110,210,255,0.2);}
@@ -51,76 +198,459 @@
   .badge-equipped{position:absolute;top:8px;right:8px;padding:3px 7px;border-radius:6px;font-size:8px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(120,255,160,0.95);background:rgba(120,255,160,0.12);border:1px solid rgba(120,255,160,0.25);z-index:5;}
   .badge-copies{position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:6px;font-size:10px;font-weight:900;color:rgba(255,255,255,0.8);background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);z-index:5;}
   .lock-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;opacity:0.3;z-index:5;}
-  .card-skill{position:absolute;inset:0;background:rgba(8,6,14,0.93);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;opacity:0;transition:opacity 0.15s;z-index:10;border-radius:14px;}
+  .card-skill{
+    position:absolute;inset:0;background:rgba(8,6,14,0.93);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:14px;opacity:0;transition:opacity 0.15s;z-index:10;border-radius:14px;
+  }
   .card:hover .card-skill{opacity:1;}
   .card.locked .card-skill{display:none;}
   .skill-name{font-size:15px;font-weight:900;margin-bottom:3px;}
   .skill-cmd{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;font-family:'Courier New',monospace;}
   .skill-desc{font-size:11px;color:rgba(255,255,255,0.6);text-align:center;line-height:1.4;}
-  .footer{text-align:center;padding:30px;font-size:11px;color:rgba(255,255,255,0.15);letter-spacing:2px;text-transform:uppercase;}
+
+  /* ============ COMMANDS TABLE ============ */
+  .cmd-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;}
+  .cmd-table th{
+    text-align:left;padding:10px 14px;
+    border-bottom:1px solid var(--border-hi);
+    color:var(--muted);font-size:11px;font-weight:600;
+    text-transform:uppercase;letter-spacing:0.5px;
+  }
+  .cmd-table td{padding:10px 14px;border-bottom:1px solid var(--border);}
+  .cmd-table tr:last-child td{border-bottom:none;}
+  .cmd-table tr:hover td{background:rgba(255,255,255,0.02);}
+  .cmd-code{
+    font-family:'Courier New',monospace;font-weight:700;font-size:12px;
+    color:var(--accent);background:rgba(120,255,160,0.08);
+    padding:3px 8px;border-radius:4px;
+  }
+  .cmd-cat{
+    display:inline-block;padding:3px 8px;border-radius:4px;
+    font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
+  }
+  .cmd-cat-gacha{background:rgba(255,210,60,0.1);color:var(--gold);}
+  .cmd-cat-skill{background:rgba(155,95,255,0.1);color:var(--accent2);}
+  .cmd-cat-info{background:rgba(110,210,255,0.1);color:rgba(130,220,255,0.9);}
+
+  /* ============ SUGGESTIONS ============ */
+  .suggest-form{
+    max-width:600px;margin:0 auto;
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:14px;padding:28px;
+  }
+  .suggest-form label{
+    display:block;font-size:12px;font-weight:600;color:var(--muted);
+    margin-bottom:6px;margin-top:16px;text-transform:uppercase;letter-spacing:0.5px;
+  }
+  .suggest-form label:first-child{margin-top:0;}
+  .suggest-form input,.suggest-form textarea,.suggest-form select{
+    width:100%;padding:12px 16px;border-radius:10px;
+    border:1px solid var(--border);background:rgba(255,255,255,0.04);
+    color:var(--text);font-size:14px;font-family:inherit;outline:none;
+    transition:border-color 0.2s;resize:vertical;
+  }
+  .suggest-form input:focus,.suggest-form textarea:focus{border-color:rgba(120,255,160,0.3);}
+  .suggest-form textarea{min-height:120px;}
+  .suggest-btn{
+    margin-top:20px;width:100%;padding:14px;border:none;border-radius:10px;
+    background:linear-gradient(135deg,rgba(120,255,160,0.15),rgba(155,95,255,0.15));
+    border:1px solid rgba(120,255,160,0.2);
+    color:var(--accent);font-size:14px;font-weight:700;font-family:inherit;
+    cursor:pointer;transition:all 0.2s;
+  }
+  .suggest-btn:hover{
+    background:linear-gradient(135deg,rgba(120,255,160,0.25),rgba(155,95,255,0.25));
+    border-color:rgba(120,255,160,0.4);
+  }
+
+  /* ============ PROFILE ============ */
+  .profile-section{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:14px;padding:24px;margin-bottom:20px;
+  }
+  .profile-section h3{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+  /* ============ FOOTER ============ */
+  .footer{text-align:center;padding:40px 20px;font-size:11px;color:rgba(255,255,255,0.12);letter-spacing:2px;text-transform:uppercase;}
   .update-info{text-align:center;font-size:11px;color:rgba(255,255,255,0.15);padding:10px;display:none;}
-  @media(max-width:768px){.grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}.title{font-size:24px;}.search-container{padding:40px 16px 16px;}.section{padding:16px 16px 8px;}}
 </style>
 </head>
 <body>
-<div class="search-container">
-  <div class="logo">Lumenfall</div>
-  <div class="title">Colección</div>
-  <input type="text" class="search-box" id="searchInput" placeholder="Ingresá tu nombre de Twitch..." autofocus />
-  <div class="search-hint">Escribí tu nombre de usuario de Twitch y presioná Enter</div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-logo">Lumenfall</div>
+  <button class="nav-btn active" data-tab="inicio">Inicio</button>
+  <button class="nav-btn" data-tab="banner">Banner</button>
+  <button class="nav-btn" data-tab="coleccion">Colección</button>
+  <button class="nav-btn" data-tab="comandos">Comandos</button>
+  <button class="nav-btn" data-tab="sugerencias">Sugerencias</button>
+</nav>
+
+<!-- ============ PAGE: INICIO ============ -->
+<div class="page active" id="page-inicio">
+  <div class="hero">
+    <div class="hero-title">Bienvenido a Lumenfall</div>
+    <p class="hero-sub">
+      Lumenfall es el sistema gacha del canal de <strong>El Novato</strong> en Twitch.
+      Conseguí personajes, equipalos, usá sus poderes en el chat y competí con la comunidad.
+      Todo se juega en vivo durante los streams.
+    </p>
+  </div>
+
+  <div class="info-cards">
+    <div class="info-card">
+      <h3>🎰 ¿Cómo funciona?</h3>
+      <p>
+        Durante los streams podés hacer tiradas (multis) para obtener personajes.
+        Cada multi te da una tirada de 10 personajes con chances de obtener
+        personajes de 4 y 5 estrellas. El sistema tiene pity: cuanto más tirás sin suerte,
+        más chances tenés de obtener algo bueno.
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>⚔️ Skills y poderes</h3>
+      <p>
+        Cada personaje tiene una habilidad única que podés usar en el chat del stream.
+        Desde scramblear los mensajes de otros usuarios, silenciarlos, protegerlos con escudos,
+        hasta fijar mensajes en el overlay. Equipá a tu personaje favorito con <code>!equip</code>
+        y usá su skill.
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>🌟 Pity y garantía</h3>
+      <p>
+        Si llegás a 80 tiradas sin obtener un 5 estrellas, se te garantiza uno.
+        Además, si perdés el 50/50 (te sale un permanente en vez del promo),
+        el siguiente 5 estrellas que obtengas va a ser el promo garantizado.
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>🏆 Colección</h3>
+      <p>
+        Todos tus personajes quedan guardados en tu inventario. Podés ver tu colección
+        completa en la pestaña "Colección" de esta misma página, o con <code>!personajes</code>
+        en el chat. Intentá juntar todos los personajes disponibles.
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>📢 Banners</h3>
+      <p>
+        Los personajes disponibles van rotando por banners. Cada banner tiene un
+        personaje promo de 5 estrellas con rate-up y personajes destacados de 4 estrellas.
+        Los personajes de banners anteriores siguen siendo equipables pero ya no se obtienen por gacha.
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>💡 Consejos</h3>
+      <p>
+        Equipá siempre un personaje para poder usar su skill.
+        Guardá tus tiradas para cuando haya un banner que te guste.
+        Y cuidado con los poderes de otros usuarios: alguien podría scramblear
+        tus mensajes o disfrazarte como otro.
+      </p>
+    </div>
+  </div>
 </div>
-<div class="not-found" id="notFound">No se encontró el usuario. ¿Escribiste bien tu nombre de Twitch?</div>
-<div class="user-header" id="userHeader"><div class="user-name" id="userName"></div><div class="user-stats" id="userStats"></div></div>
-<div class="section section-5" id="section5"><div class="section-title">★★★★★ 5 Estrellas</div><div class="grid" id="grid5"></div></div>
-<div class="section section-4" id="section4"><div class="section-title">★★★★ 4 Estrellas</div><div class="grid" id="grid4"></div></div>
-<div class="update-info" id="updateInfo"></div>
+
+<!-- ============ PAGE: BANNER ============ -->
+<div class="page" id="page-banner">
+  <div class="banner-header">
+    <h2>Banner Actual</h2>
+    <p>Personajes disponibles en el banner activo</p>
+  </div>
+
+  <div id="banner-content">
+    <p style="text-align:center;color:var(--muted);">Cargando datos...</p>
+  </div>
+</div>
+
+<!-- ============ PAGE: COLECCIÓN ============ -->
+<div class="page" id="page-coleccion">
+  <div class="search-container">
+    <div class="search-title">Mi Colección</div>
+    <input type="text" class="search-box" id="searchInput" placeholder="Ingresá tu nombre de Twitch..." />
+    <div class="search-hint">Escribí tu nombre de usuario de Twitch y presioná Enter</div>
+  </div>
+  <div class="not-found" id="notFound">No se encontró el usuario. ¿Escribiste bien tu nombre de Twitch?</div>
+  <div class="user-header" id="userHeader"><div class="user-name" id="userName"></div><div class="user-stats" id="userStats"></div></div>
+  <div class="coll-section section-5" id="section5"><div class="coll-section-title">★★★★★ 5 Estrellas</div><div class="grid" id="grid5"></div></div>
+  <div class="coll-section section-4" id="section4"><div class="coll-section-title">★★★★ 4 Estrellas</div><div class="grid" id="grid4"></div></div>
+  <div class="update-info" id="updateInfo"></div>
+</div>
+
+<!-- ============ PAGE: COMANDOS ============ -->
+<div class="page" id="page-comandos">
+  <div style="text-align:center;margin-bottom:30px;">
+    <div class="search-title">Comandos</div>
+    <p style="font-size:14px;color:var(--muted);">Todos los comandos disponibles para jugar Lumenfall en el chat</p>
+  </div>
+
+  <div class="profile-section">
+    <h3>🎰 Gacha</h3>
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cmd-code">!multi</span></td><td>Hacer una tirada de 10 personajes en el banner actual</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="profile-section">
+    <h3>📋 Información</h3>
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cmd-code">!personajes</span></td><td>Ver tu colección de personajes en el chat</td></tr>
+        <tr><td><span class="cmd-code">!perfil</span></td><td>Ver tu perfil: personaje equipado, pity y garantía</td></tr>
+        <tr><td><span class="cmd-code">!equip [nombre]</span></td><td>Equipar un personaje para usar su skill. Ej: <code>!equip Shen Luo</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="profile-section">
+    <h3>⚔️ Skills de personajes</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Cada personaje tiene un skill. Tenés que tenerlo equipado para poder usarlo.</p>
+    <table class="cmd-table" id="skills-table">
+      <thead><tr><th>Comando</th><th>Personaje</th><th>Skill</th><th>Descripción</th></tr></thead>
+      <tbody id="skills-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ PAGE: SUGERENCIAS ============ -->
+<div class="page" id="page-sugerencias">
+  <div style="text-align:center;margin-bottom:30px;">
+    <div class="search-title">Sugerencias</div>
+    <p style="font-size:14px;color:var(--muted);">¿Tenés ideas para mejorar Lumenfall? ¡Contanos!</p>
+  </div>
+
+  <div class="suggest-form" id="suggestForm">
+    <label>Tu nombre de Twitch</label>
+    <input type="text" id="sg-name" placeholder="usuario" />
+
+    <label>Tipo de sugerencia</label>
+    <select id="sg-type">
+      <option value="Personaje nuevo">Personaje nuevo</option>
+      <option value="Skill nueva">Skill nueva</option>
+      <option value="Mejora de sistema">Mejora de sistema</option>
+      <option value="Bug / Problema">Bug / Problema</option>
+      <option value="Otro">Otro</option>
+    </select>
+
+    <label>Tu sugerencia</label>
+    <textarea id="sg-body" placeholder="Describí tu idea con todo el detalle que quieras..."></textarea>
+
+    <button class="suggest-btn" onclick="sendSuggestion()">Enviar sugerencia</button>
+  </div>
+</div>
+
 <div class="footer">Lumenfall · El Novato</div>
+
+<!-- ============ SCRIPTS ============ -->
 <script>
-const ELEM_ICONS={electro:"⚡",fuego:"🔥",agua:"❄️",luz:"☀",aire:"🍃",vacio:"✦"};
-const ELEM_NAMES={electro:"Electro",fuego:"Fuego",agua:"Agua",luz:"Luz",aire:"Aire",vacio:"Vacío"};
-const IMG_BASE="img/";
-let gameData=null;
-async function loadData(){try{const r=await fetch("data.json?t="+Date.now());gameData=await r.json();}catch(e){console.error(e);}}
-function createCard(n,info,owned,copies,eq){
-  const is5=info.tier.startsWith("5"),r=is5?5:4;
-  const card=document.createElement("div");
-  card.className=`card ${owned?"owned":"locked"} rarity-${r}`;
-  let b="";
-  if(owned&&eq)b+=`<div class="badge-equipped">Equipado</div>`;
-  if(owned&&copies>0)b+=`<div class="badge-copies">x${copies}</div>`;
-  if(!owned)b+=`<div class="lock-icon">🔒</div>`;
-  let sk="";
-  if(owned&&info.skill)sk=`<div class="card-skill"><div class="skill-name">${info.skill}</div><div class="skill-cmd">${info.cmd||""}</div><div class="skill-desc">${info.desc||""}</div></div>`;
-  card.innerHTML=`${b}<img class="card-img" src="${IMG_BASE}${n.replace(/ /g,"%20")}.png" alt="${n}" loading="lazy"/><div class="card-overlay"></div><div class="card-info"><div class="card-stars ${is5?"star-5":"star-4"}">${"★".repeat(r)}</div><div class="card-name">${n}</div><div class="card-elem elem-${info.elem}">${ELEM_ICONS[info.elem]||"?"} ${ELEM_NAMES[info.elem]||info.elem}</div></div>${sk}`;
+const ELEM_ICONS = { electro:"⚡", fuego:"🔥", agua:"❄️", luz:"☀", aire:"🍃", vacio:"✦" };
+const ELEM_NAMES = { electro:"Electro", fuego:"Fuego", agua:"Agua", luz:"Luz", aire:"Aire", vacio:"Vacío" };
+const ELEM_COLORS = {
+  electro:"rgba(180,130,255,0.9)", fuego:"rgba(255,160,90,0.9)",
+  agua:"rgba(130,220,255,0.9)", luz:"rgba(255,225,110,0.9)",
+  aire:"rgba(140,255,180,0.9)", vacio:"rgba(255,130,210,0.9)"
+};
+const IMG_BASE = "img/";
+let gameData = null;
+
+// ======== NAV ========
+document.querySelectorAll(".nav-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("page-" + btn.dataset.tab).classList.add("active");
+  });
+});
+
+// ======== LOAD DATA ========
+async function loadData(){
+  try{
+    const r = await fetch("data.json?t=" + Date.now());
+    gameData = await r.json();
+  }catch(e){ console.error(e); }
+}
+
+// ======== CARD BUILDER ========
+function createCard(n, info, owned, copies, eq, showSkillOnHover){
+  const is5 = info.tier.startsWith("5"), r = is5 ? 5 : 4;
+  const card = document.createElement("div");
+  card.className = `card ${owned ? "owned" : "locked"} rarity-${r}`;
+
+  let b = "";
+  if(owned && eq) b += `<div class="badge-equipped">Equipado</div>`;
+  if(owned && copies > 0) b += `<div class="badge-copies">x${copies}</div>`;
+  if(!owned) b += `<div class="lock-icon">🔒</div>`;
+
+  let sk = "";
+  if(showSkillOnHover && info.skill){
+    sk = `<div class="card-skill"><div class="skill-name">${info.skill}</div><div class="skill-cmd">${info.cmd || ""}</div><div class="skill-desc">${info.desc || ""}</div></div>`;
+  }
+
+  card.innerHTML = `${b}<img class="card-img" src="${IMG_BASE}${n.replace(/ /g,"%20")}.png" alt="${n}" loading="lazy"/><div class="card-overlay"></div><div class="card-info"><div class="card-stars ${is5 ? "star-5" : "star-4"}">${"★".repeat(r)}</div><div class="card-name">${n}</div><div class="card-elem elem-${info.elem}">${ELEM_ICONS[info.elem] || "?"} ${ELEM_NAMES[info.elem] || info.elem}</div></div>${sk}`;
   return card;
 }
-function showCollection(username){
-  const l=username.trim().toLowerCase(),ud=gameData.users[l];
-  const nf=document.getElementById("notFound"),h=document.getElementById("userHeader"),s5=document.getElementById("section5"),s4=document.getElementById("section4"),g5=document.getElementById("grid5"),g4=document.getElementById("grid4"),ui=document.getElementById("updateInfo");
-  g5.innerHTML="";g4.innerHTML="";
-  if(!ud){nf.style.display="block";h.style.display="none";s5.style.display="none";s4.style.display="none";ui.style.display="none";return;}
-  nf.style.display="none";
-  const inv=ud.inventory||{},eq=ud.equipped||"",pity=ud.pity||0,guar=ud.guarantee||false;
-  let total=0,totalC=Object.keys(gameData.characters).length;
-  const c5=[],c4=[];
-  for(const[name,info]of Object.entries(gameData.characters)){
-    const copies=inv[name]||0,owned=copies>0;if(owned)total++;
-    const isEq=eq.toLowerCase()===name.toLowerCase();
-    if(info.tier.startsWith("5"))c5.push({name,info,owned,copies,isEq});
-    else c4.push({name,info,owned,copies,isEq});
+
+// ======== BANNER PAGE ========
+function renderBanner(){
+  if(!gameData) return;
+  const chars = gameData.characters;
+  const container = document.getElementById("banner-content");
+  let html = "";
+
+  // Find promo 5-star
+  const promo = Object.entries(chars).find(([n, info]) => info.tier === "5-promo");
+  if(promo){
+    const [name, info] = promo;
+    html += `<div class="banner-promo">`;
+    html += `<img class="banner-promo-img" src="${IMG_BASE}${name.replace(/ /g,"%20")}.png" alt="${name}" />`;
+    html += `<div class="banner-promo-info">`;
+    html += `<div class="stars">★★★★★</div>`;
+    html += `<h3 style="color:${ELEM_COLORS[info.elem] || ""}">${name}</h3>`;
+    html += `<div class="elem-tag elem-${info.elem}">${ELEM_ICONS[info.elem] || ""} ${ELEM_NAMES[info.elem] || ""}</div>`;
+    html += `<div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:4px;">Promo de banner · Rate-up activo</div>`;
+    if(info.skill){
+      html += `<div class="skill-info">`;
+      html += `<div class="skill-name" style="color:${ELEM_COLORS[info.elem] || ""}">${info.skill}</div>`;
+      html += `<div class="skill-cmd">${info.cmd || ""}</div>`;
+      html += `<div class="skill-desc">${info.desc || ""}</div>`;
+      html += `</div>`;
+    }
+    html += `</div></div>`;
   }
-  const s=(a,b)=>{if(a.owned&&!b.owned)return-1;if(!a.owned&&b.owned)return 1;return a.name.localeCompare(b.name);};
-  c5.sort(s);c4.sort(s);
-  c5.forEach(c=>g5.appendChild(createCard(c.name,c.info,c.owned,c.copies,c.isEq)));
-  c4.forEach(c=>g4.appendChild(createCard(c.name,c.info,c.owned,c.copies,c.isEq)));
-  document.getElementById("userName").textContent=username;
-  document.getElementById("userStats").textContent=`${total} / ${totalC} personajes · Pity: ${pity}/80 · Asegurado: ${guar?"SÍ":"NO"}`;
-  h.style.display="block";s5.style.display="block";s4.style.display="block";
-  if(gameData.lastUpdate){ui.textContent=`Última actualización: ${new Date(gameData.lastUpdate).toLocaleString("es-AR")}`;ui.style.display="block";}
+
+  // Perma 5-stars
+  const perma5 = Object.entries(chars).filter(([n, info]) => info.tier === "5-perma");
+  if(perma5.length > 0){
+    html += `<div class="banner-section-title" style="color:rgba(255,210,60,0.5);">★★★★★ 5 Estrellas Permanentes</div>`;
+    html += `<div class="banner-grid" id="banner-perma5"></div>`;
+  }
+
+  // Featured 4-stars
+  const featured4 = Object.entries(chars).filter(([n, info]) => info.tier === "4");
+  if(featured4.length > 0){
+    html += `<div class="banner-section-title" style="color:rgba(160,130,255,0.5);">★★★★ 4 Estrellas Destacados</div>`;
+    html += `<div class="banner-grid" id="banner-feat4"></div>`;
+  }
+
+  container.innerHTML = html;
+
+  // Render cards
+  const gridPerma5 = document.getElementById("banner-perma5");
+  const gridFeat4 = document.getElementById("banner-feat4");
+  if(gridPerma5) perma5.forEach(([n, info]) => gridPerma5.appendChild(createCard(n, info, true, 0, false, true)));
+  if(gridFeat4) featured4.forEach(([n, info]) => gridFeat4.appendChild(createCard(n, info, true, 0, false, true)));
 }
-document.getElementById("searchInput").addEventListener("keydown",(e)=>{if(e.key==="Enter"){const v=e.target.value.trim();if(v)showCollection(v);}});
-const p=new URLSearchParams(window.location.search),u=p.get("user");
-loadData().then(()=>{if(u){document.getElementById("searchInput").value=u;showCollection(u);}});
+
+// ======== COLLECTION PAGE ========
+function showCollection(username){
+  const l = username.trim().toLowerCase(), ud = gameData.users[l];
+  const nf = document.getElementById("notFound");
+  const h = document.getElementById("userHeader");
+  const s5 = document.getElementById("section5");
+  const s4 = document.getElementById("section4");
+  const g5 = document.getElementById("grid5");
+  const g4 = document.getElementById("grid4");
+  const ui = document.getElementById("updateInfo");
+
+  g5.innerHTML = ""; g4.innerHTML = "";
+  if(!ud){ nf.style.display = "block"; h.style.display = "none"; s5.style.display = "none"; s4.style.display = "none"; ui.style.display = "none"; return; }
+  nf.style.display = "none";
+
+  const inv = ud.inventory || {}, eq = ud.equipped || "", pity = ud.pity || 0, guar = ud.guarantee || false;
+  let total = 0, totalC = Object.keys(gameData.characters).length;
+  const c5 = [], c4 = [];
+
+  for(const [name, info] of Object.entries(gameData.characters)){
+    const copies = inv[name] || 0, owned = copies > 0; if(owned) total++;
+    const isEq = eq.toLowerCase() === name.toLowerCase();
+    if(info.tier.startsWith("5")) c5.push({ name, info, owned, copies, isEq });
+    else c4.push({ name, info, owned, copies, isEq });
+  }
+
+  const s = (a, b) => { if(a.owned && !b.owned) return -1; if(!a.owned && b.owned) return 1; return a.name.localeCompare(b.name); };
+  c5.sort(s); c4.sort(s);
+  c5.forEach(c => g5.appendChild(createCard(c.name, c.info, c.owned, c.copies, c.isEq, true)));
+  c4.forEach(c => g4.appendChild(createCard(c.name, c.info, c.owned, c.copies, c.isEq, true)));
+
+  document.getElementById("userName").textContent = username;
+  document.getElementById("userStats").textContent = `${total} / ${totalC} personajes · Pity: ${pity}/80 · Garantía: ${guar ? "SÍ" : "NO"}`;
+  h.style.display = "block"; s5.style.display = "block"; s4.style.display = "block";
+  if(gameData.lastUpdate){
+    ui.textContent = `Última actualización: ${new Date(gameData.lastUpdate).toLocaleString("es-AR")}`;
+    ui.style.display = "block";
+  }
+}
+
+document.getElementById("searchInput").addEventListener("keydown", (e) => {
+  if(e.key === "Enter"){ const v = e.target.value.trim(); if(v) showCollection(v); }
+});
+
+// ======== SKILLS TABLE ========
+function renderSkillsTable(){
+  if(!gameData) return;
+  const tbody = document.getElementById("skills-tbody");
+  tbody.innerHTML = "";
+
+  for(const [name, info] of Object.entries(gameData.characters)){
+    if(!info.skill) continue;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><span class="cmd-code">${info.cmd || ""}</span></td>
+      <td><span style="color:${ELEM_COLORS[info.elem] || ""}">${ELEM_ICONS[info.elem] || ""} ${name}</span></td>
+      <td style="font-weight:600;">${info.skill}</td>
+      <td style="color:rgba(255,255,255,0.6);font-size:12px;">${info.desc || ""}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+}
+
+// ======== SUGGESTIONS ========
+function sendSuggestion(){
+  const name = document.getElementById("sg-name").value.trim();
+  const type = document.getElementById("sg-type").value;
+  const body = document.getElementById("sg-body").value.trim();
+
+  if(!name){ alert("Ingresá tu nombre de Twitch"); return; }
+  if(!body){ alert("Escribí tu sugerencia"); return; }
+
+  const subject = encodeURIComponent(`[Lumenfall] ${type} — de ${name}`);
+  const mailBody = encodeURIComponent(
+    `Usuario: ${name}\nTipo: ${type}\n\n${body}\n\n---\nEnviado desde la web de Lumenfall`
+  );
+
+  window.location.href = `mailto:elnovato.lumenfall@gmail.com?subject=${subject}&body=${mailBody}`;
+}
+
+// ======== INIT ========
+const params = new URLSearchParams(window.location.search);
+const urlUser = params.get("user");
+const urlTab = params.get("tab");
+
+loadData().then(() => {
+  renderBanner();
+  renderSkillsTable();
+
+  if(urlTab){
+    const btn = document.querySelector(`.nav-btn[data-tab="${urlTab}"]`);
+    if(btn) btn.click();
+  }
+
+  if(urlUser){
+    document.getElementById("searchInput").value = urlUser;
+    // Switch to collection tab
+    const colBtn = document.querySelector('.nav-btn[data-tab="coleccion"]');
+    if(colBtn && !urlTab) colBtn.click();
+    showCollection(urlUser);
+  }
+});
 </script>
 </body>
 </html>
