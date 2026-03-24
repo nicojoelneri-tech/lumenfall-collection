@@ -1,5 +1,5 @@
 ﻿{
-  "lastUpdate": "2026-03-22T03:37:38",
+  "lastUpdate": "2026-03-23T23:30:45",
   "characters": {
     "Shen Luo": {"elem":"aire","tier":"5-promo","skill":"VOZ","cmd":"!voz <mensaje>","desc":"Tu mensaje se reproduce en voz alta en el stream. 3 usos por día."},
     "Vespera Rohe": {"elem":"electro","tier":"5-promo-old","skill":"MARCA","cmd":"!marcar @usuario","desc":"Marca a un usuario. Si usa un poder negativo, le rebota. Dura 10 min."},
@@ -16,20 +16,20 @@
     "Kael Draven": {"elem":"vacio","tier":"4-old","skill":"MULTINULL","cmd":"!multinull","desc":"Bloquea todas las multis por 2 min. 1 uso por día."}
   },
   "users": {
-    "elnovato_nn": {"inventory":{"Shen Luo":2,"Vespera Rohe":1,"Eira Lumen":1,"Marel Varg":1,"Yun Ling":2,"Hong Ye":1,"Seraphine Velaryn":1,"Ren Kuro":3,"Zippa zip Kalix":5,"Miren Vale":3,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Shen Luo","pity":10,"guarantee":false},
+    "elnovato_nn": {"inventory":{"Shen Luo":5,"Vespera Rohe":1,"Eira Lumen":1,"Marel Varg":1,"Yun Ling":2,"Hong Ye":2,"Seraphine Velaryn":1,"Ren Kuro":7,"Zippa zip Kalix":14,"Miren Vale":7,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Seraphine Velaryn","pity":20,"guarantee":false},
     "elexperimentado_nn": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "tech_ia": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
+    "tech_ia": {"inventory":{"Vespera Rohe":1,"Marel Varg":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Marel Varg","pity":0,"guarantee":false},
     "serpiwild": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "ismaelbentancur": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "nas_vc45": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "facu_cartethyialover": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "shilowdynasty21": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
+    "facu_cartethyialover": {"inventory":{"Vespera Rohe":1,"Eira Lumen":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Eira Lumen","pity":0,"guarantee":false},
+    "shilowdynasty21": {"inventory":{"Vespera Rohe":1,"Seraphine Velaryn":1,"Zippa zip Kalix":1,"Miren Vale":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Seraphine Velaryn","pity":20,"guarantee":false},
     "jagogameplay": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "cris_n123": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "adalterr": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "paandiwi": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "aarondmc100": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "qgjuanchi": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
+    "aarondmc100": {"inventory":{"Vespera Rohe":1,"Yun Ling":1,"Zippa zip Kalix":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":10,"guarantee":true},
+    "qgjuanchi": {"inventory":{"Vespera Rohe":1,"Marel Varg":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Marel Varg","pity":0,"guarantee":false},
     "faetonpxy": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "sant11_uwu": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "kelingchi": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
@@ -44,6 +44,7 @@
     "aizenmael": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "harlyngh": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "foforiito__": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
-    "rowfay": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false}
+    "rowfay": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
+    "rich_rodv": {"inventory":{"Eira Lumen":1},"equipped":"Eira Lumen","pity":0,"guarantee":false}
   }
 }
