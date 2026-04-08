@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-04-08T10:13:52",
+  "lastUpdate": "2026-04-08T13:36:41",
   "characters": {
     "Shen Luo": {"elem":"aire","tier":"5-promo","skill":"VOZ","cmd":"!voz <mensaje>","desc":"Tu mensaje se reproduce en voz alta en el stream. 3 usos por día."},
     "Vespera Rohe": {"elem":"electro","tier":"5-promo-old","skill":"MARCA","cmd":"!marcar @usuario","desc":"Marca a un usuario. Si usa un poder negativo, le rebota. Dura 10 min."},
@@ -60,6 +60,7 @@
     "sunesu_": {"inventory":{"Ren Kuro":1},"equipped":"","pity":10,"guarantee":false},
     "frostwardx": {"inventory":{"Miren Vale":1},"equipped":"","pity":10,"guarantee":false},
     "basededulce": {"inventory":{"Zippa zip Kalix":1},"equipped":"","pity":10,"guarantee":false},
-    "alexx1394": {"inventory":{"Miren Vale":1},"equipped":"","pity":10,"guarantee":false}
+    "alexx1394": {"inventory":{"Miren Vale":1},"equipped":"","pity":10,"guarantee":false},
+    "tidus_kr": {"inventory":{"Zippa zip Kalix":1},"equipped":"","pity":10,"guarantee":false}
   }
 }
