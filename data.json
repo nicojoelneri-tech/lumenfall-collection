@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-04-09T12:24:56",
+  "lastUpdate": "2026-04-09T12:54:22",
   "characters": {
     "Shen Luo": {"elem":"aire","tier":"5-promo","skill":"VOZ","cmd":"!voz <mensaje>","desc":"Tu mensaje se reproduce en voz alta en el stream. 3 usos por día."},
     "Vespera Rohe": {"elem":"electro","tier":"5-promo-old","skill":"MARCA","cmd":"!marcar @usuario","desc":"Marca a un usuario. Si usa un poder negativo, le rebota. Dura 10 min."},
@@ -24,7 +24,7 @@
     "nas_vc45": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "facu_cartethyialover": {"inventory":{"Vespera Rohe":1,"Eira Lumen":1,"Ren Kuro":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Eira Lumen","pity":10,"guarantee":false},
     "shilowdynasty21": {"inventory":{"Vespera Rohe":1,"Seraphine Velaryn":1,"Zippa zip Kalix":1,"Miren Vale":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Seraphine Velaryn","pity":20,"guarantee":false},
-    "jagogameplay": {"inventory":{"Vespera Rohe":1,"Eira Lumen":2,"Ren Kuro":3,"Zippa zip Kalix":2,"Miren Vale":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Vespera Rohe","pity":60,"guarantee":true},
+    "jagogameplay": {"inventory":{"Shen Luo":2,"Vespera Rohe":1,"Eira Lumen":2,"Ren Kuro":4,"Zippa zip Kalix":2,"Miren Vale":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Vespera Rohe","pity":0,"guarantee":false},
     "cris_n123": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "adalterr": {"inventory":{"Vespera Rohe":1,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"","pity":0,"guarantee":false},
     "paandiwi": {"inventory":{"Shen Luo":1,"Vespera Rohe":1,"Marel Varg":1,"Ren Kuro":2,"Zippa zip Kalix":1,"Miren Vale":2,"Liora":1,"Kaisr Vel":1,"Kael Draven":1},"equipped":"Shen Luo","pity":0,"guarantee":false},
